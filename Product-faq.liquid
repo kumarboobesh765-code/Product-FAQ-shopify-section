@@ -1,0 +1,108 @@
+<div class="faq-wrapper">
+  <h3 class="faq-title">FAQs</h3>
+
+  <div class="faq-container">
+    {% for block in section.blocks %}
+      <details class="faq-item">
+        <summary>{{ block.settings.question }}</summary>
+        <div class="faq-content">
+          {{ block.settings.answer }}
+        </div>
+      </details>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+.faq-wrapper {
+  max-width: var(--page-width);
+  margin: 40px auto;
+  padding: 0 1.5rem;
+}
+
+.faq-title {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #2f3e2f;
+}
+
+/* Accordion box */
+.faq-container {
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Each item */
+.faq-item {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 14px 18px;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+/* Question */
+.faq-item summary {
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  color: #2f3e2f;
+}
+
+/* + icon */
+.faq-item summary::after {
+  content: "+";
+  font-size: 18px;
+}
+
+/* - icon */
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+/* Answer */
+.faq-content {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Hover */
+.faq-item summary:hover {
+  color: #1b5e20;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Product FAQ",
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product FAQ"
+    }
+  ]
+}
+{% endschema %}
